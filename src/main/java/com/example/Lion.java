@@ -1,22 +1,25 @@
 package com.example;
 
+import com.example.constants.AnimalKind;
+import com.example.constants.Sex;
+
 import java.util.List;
 
 public class Lion {
 
     boolean hasMane;
+    Feline feline;
 
-    public Lion(String sex) throws Exception {
-        if ("Самец".equals(sex)) {
+    public Lion(String sex, Feline feline) throws Exception {
+        if (sex.equals(Sex.MALE.getDescription())) {
             hasMane = true;
-        } else if ("Самка".equals(sex)) {
+        } else if (sex.equals(Sex.FEMALE.getDescription())) {
             hasMane = false;
         } else {
-            throw new Exception("Используйте допустимые значения пола животного - самей или самка");
+            throw new Exception("Используйте допустимые значения пола животного - " + Sex.MALE.getDescription() + " или " + Sex.FEMALE.getDescription());
         }
+        this.feline = feline;
     }
-
-    Feline feline = new Feline();
 
     public int getKittens() {
         return feline.getKittens();
@@ -27,6 +30,6 @@ public class Lion {
     }
 
     public List<String> getFood() throws Exception {
-        return feline.getFood("Хищник");
+        return feline.getFood(AnimalKind.PREDATOR.getDescription());
     }
 }
